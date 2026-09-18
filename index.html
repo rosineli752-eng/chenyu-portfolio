@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>陈屿 CHEN YU · 视觉传达设计作品集 2026</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/bricolage-grotesque@5.2.10/index.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/noto-sans-sc@5.2.10/index.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@5.2.8/index.css" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d0f;
+  --surface:#151518;
+  --surface-2:#1c1c20;
+  --fg:#f2efe9;
+  --muted:#8d8a84;
+  --border:#2a2a2e;
+  --accent:#ff4d00;
+  --accent-soft:color-mix(in oklch, var(--accent) 16%, transparent);
+  --font-display:'Bricolage Grotesque Variable','Noto Sans SC Variable','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-body:'Noto Sans SC Variable','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-mono:'JetBrains Mono Variable',ui-monospace,Menlo,monospace;
+  --fs-display:clamp(56px,11vw,160px);
+  --fs-h1:clamp(40px,6vw,76px);
+  --fs-h2:clamp(28px,4vw,44px);
+  --fs-h3:20px;
+  --fs-lead:17px;
+  --fs-body:15px;
+  --fs-meta:12px;
+  --gap-md:20px; --gap-lg:32px; --gap-xl:56px; --gap-2xl:104px;
+  --container:1240px; --gutter:clamp(18px,4vw,40px);
+  --radius:6px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font-family:var(--font-body);font-size:var(--fs-body);line-height:1.7;
+  text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;background:none;border:0;color:inherit;padding:0}
+p{text-wrap:pretty}
+h1,h2,h3{text-wrap:balance;margin:0}
+::selection{background:var(--accent);color:#0d0d0f}
+
+/* custom cursor */
+#cursor{
+  position:fixed;top:0;left:0;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);pointer-events:none;z-index:999;
+  transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,background .25s ease;
+  mix-blend-mode:normal;
+}
+#cursor.hovering{width:52px;height:52px;background:transparent;border:1.5px solid var(--accent)}
+@media (pointer:coarse){#cursor{display:none}}
+
+/* loader */
+#loader{
+  position:fixed;inset:0;background:var(--bg);z-index:1000;
+  display:grid;place-items:center;transition:transform .7s cubic-bezier(.76,0,.24,1);
+}
+#loader.done{transform:translateY(-100%)}
+#loader .count{font-family:var(--font-mono);font-size:clamp(48px,10vw,120px);color:var(--accent);letter-spacing:-.04em}
+
+/* ── nav ─────────────────────────── */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px var(--gutter);
+  mix-blend-mode:difference;color:#f2efe9;
+}
+.topnav .logo{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.02em}
+.topnav nav{display:flex;gap:26px;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.topnav nav a{opacity:.7;transition:opacity .2s}
+.topnav nav a:hover{opacity:1;color:var(--accent)}
+@media (max-width:640px){.topnav nav{gap:14px;font-size:11px}}
+
+/* ── hero ─────────────────────────── */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;padding:110px var(--gutter) 0;overflow:hidden}
+#typeCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero-inner{position:relative;z-index:2;pointer-events:none}
+.hero .eyebrow{font-family:var(--font-mono);font-size:var(--fs-meta);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.hero h1{
+  font-family:var(--font-display);font-weight:800;
+  font-size:var(--fs-display);line-height:.95;letter-spacing:-.045em;
+  margin:0;text-transform:uppercase;
+}
+.hero h1 .outline{
+  color:transparent;-webkit-text-stroke:1.5px var(--fg);display:block;
+}
+.hero h1 .fill{color:var(--accent);display:block}
+.hero-sub{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;
+  padding:26px 0 22px;margin-top:clamp(20px,4vh,44px);border-top:1px solid var(--border)}
+.hero-sub p{margin:0;max-width:44ch;color:var(--muted)}
+.hero-sub .meta{font-family:var(--font-mono);font-size:var(--fs-meta);color:var(--muted)}
+.scroll-hint{font-family:var(--font-mono);font-size:var(--fs-meta);color:var(--accent);animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* marquee */
+.marquee{border-block:1px solid var(--border);overflow:hidden;padding:14px 0;user-select:none}
+.marquee-track{display:flex;gap:0;width:max-content;animation:scroll 26s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{
+  font-family:var(--font-display);font-weight:700;font-size:clamp(18px,2.6vw,28px);
+  text-transform:uppercase;letter-spacing:-.01em;white-space:nowrap;padding-right:34px;
+}
+.marquee-track span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--muted)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ── sections ─────────────────────────── */
+.section{padding-block:clamp(72px,10vw,var(--gap-2xl))}
+.container{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:44px}
+.sec-head .eyebrow{font-family:var(--font-mono);font-size:var(--fs-meta);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0}
+.sec-head h2{font-family:var(--font-display);font-weight:800;font-size:var(--fs-h2);letter-spacing:-.02em;text-transform:uppercase}
+.sec-no{font-family:var(--font-mono);font-size:var(--fs-meta);color:var(--muted)}
+
+/* filter */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filters button{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  padding:9px 18px;border:1px solid var(--border);border-radius:999px;color:var(--muted);
+  transition:all .2s ease;
+}
+.filters button:hover{border-color:var(--fg);color:var(--fg)}
+.filters button.active{background:var(--accent);border-color:var(--accent);color:#0d0d0f}
+
+/* works grid */
+.works{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,2vw,24px)}
+.work{grid-column:span 6;cursor:pointer;position:relative}
+.work.wide{grid-column:span 12}
+@media (max-width:860px){.work,.work.wide{grid-column:span 12}}
+.work.hidden{display:none}
+.work-media{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;background:var(--surface)}
+.work.wide .work-media{aspect-ratio:21/9}
+.work-media .art{position:absolute;inset:0;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.work:hover .art{transform:scale(1.04)}
+.work-info{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 2px 0}
+.work-info h3{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em}
+.work-info .meta{font-family:var(--font-mono);font-size:var(--fs-meta);color:var(--muted);white-space:nowrap}
+.work-tags{display:flex;gap:8px;margin-top:4px}
+.work-tags span{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:3px 10px}
+
+/* ── poster artworks (original subject-bearing visuals) ─── */
+.art svg{width:100%;height:100%}
+.art-b1{background:#ff4d00}
+.art-b2{background:#101014}
+.art-b3{background:#e8e2d6}
+.art-b4{background:#101014}
+.art-b5{background:#f2efe9}
+.art-b6{background:#1c1c20}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ── lightbox ─────────────────────────── */
+#lightbox{
+  position:fixed;inset:0;z-index:500;display:none;
+  background:color-mix(in oklch,var(--bg) 88%,transparent);
+  backdrop-filter:blur(14px);overflow-y:auto;
+}
+#lightbox.open{display:block}
+.lb-panel{max-width:960px;margin:64px auto;padding:0 var(--gutter) 64px}
+.lb-close{position:fixed;top:20px;right:var(--gutter);font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--muted);z-index:510}
+.lb-close:hover{color:var(--accent)}
+.lb-media{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9}
+.lb-media .art{width:100%;height:100%}
+.lb-body{padding-top:28px;display:grid;grid-template-columns:2fr 1fr;gap:var(--gap-lg)}
+@media (max-width:760px){.lb-body{grid-template-columns:1fr}}
+.lb-body h3{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,4vw,40px);letter-spacing:-.02em;margin-bottom:14px;text-transform:uppercase}
+.lb-body p{color:var(--muted);margin:0 0 14px}
+.lb-facts{border-top:1px solid var(--border)}
+.lb-facts div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:12px}
+.lb-facts dt{color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* ── about ─────────────────────────── */
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(32px,6vw,96px);align-items:start}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr}}
+.portrait{
+  aspect-ratio:3/4;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(160deg,#1c1c20,#0d0d0f);position:relative;
+}
+.portrait svg{width:100%;height:100%}
+.about h2{font-family:var(--font-display);font-weight:800;font-size:var(--fs-h2);letter-spacing:-.02em;line-height:1.15;margin-bottom:20px;text-transform:uppercase}
+.about p{color:var(--muted);max-width:56ch;margin:0 0 16px}
+.skills{margin-top:36px;border-top:1px solid var(--border)}
+.skill{display:grid;grid-template-columns:1fr auto;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);font-size:14px}
+.skill .bar{grid-column:1/-1;height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+.skill .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.skill.in .bar i{width:var(--w)}
+.skill b{font-weight:600}
+.skill em{font-family:var(--font-mono);font-style:normal;font-size:11px;color:var(--muted)}
+
+/* awards */
+.awards{border-top:1px solid var(--border)}
+.award{display:grid;grid-template-columns:110px 1fr auto;gap:18px;padding:18px 0;border-bottom:1px solid var(--border);align-items:baseline}
+@media (max-width:640px){.award{grid-template-columns:1fr;gap:4px}}
+.award .meta{font-family:var(--font-mono);font-size:var(--fs-meta);color:var(--muted)}
+.award h3{font-size:16px;font-weight:600}
+.award .pull{font-family:var(--font-mono);font-size:var(--fs-meta);color:var(--accent)}
+
+/* ── contact ─────────────────────────── */
+.contact{text-align:center}
+.contact h2{
+  font-family:var(--font-display);font-weight:800;font-size:clamp(48px,9vw,128px);
+  letter-spacing:-.04em;line-height:.95;text-transform:uppercase;margin-bottom:28px;
+}
+.contact h2 a{transition:color .2s}
+.contact h2 a:hover{color:var(--accent)}
+.contact .lead{color:var(--muted);max-width:52ch;margin:0 auto 36px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border-radius:999px;
+  font-size:15px;font-weight:600;border:1px solid var(--accent);color:var(--accent);
+  transition:all .25s ease;
+}
+.btn:hover{background:var(--accent);color:#0d0d0f}
+.socials{display:flex;justify-content:center;gap:28px;margin-top:44px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.socials a:hover{color:var(--accent)}
+
+.pagefoot{border-top:1px solid var(--border);padding:28px var(--gutter);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:200;width:0}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="cursor"></div>
+<div id="loader" aria-hidden="true"><div class="count">0</div></div>
+
+<header class="topnav">
+  <a class="logo" href="#top">陈屿®</a>
+  <nav>
+    <a href="#works">作品 Work</a>
+    <a href="#about">关于 About</a>
+    <a href="#contact">联系 Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="typeCanvas" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="eyebrow">视觉传达设计 · Visual Communication Design · Portfolio 2022–2026</p>
+    <h1>
+      <span class="outline">把信息</span>
+      <span class="fill">变成冲动</span>
+    </h1>
+    <div class="hero-sub">
+      <p>陈屿，视觉传达设计系应届学生。做海报、做字体、做品牌系统——相信好的设计先让人停下来，再让人记住。</p>
+      <p class="meta">杭州 · 中国美术学院 · 视觉传达系<br>CGPA 3.9 / 4.0 · 2026 届</p>
+      <span class="scroll-hint">↓ SCROLL</span>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- WORKS -->
+<section class="section" id="works">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">01 · Selected Works</p>
+        <h2>精选作品</h2>
+      </div>
+      <span class="sec-no">6 PROJECTS / 4 CATEGORIES</span>
+    </div>
+
+    <div class="filters reveal" role="tablist" aria-label="作品分类">
+      <button class="active" data-filter="all">全部 All</button>
+      <button data-filter="poster">海报 Poster</button>
+      <button data-filter="brand">品牌 Brand</button>
+      <button data-filter="type">字体 Type</button>
+      <button data-filter="motion">动态 Motion</button>
+    </div>
+
+    <div class="works" id="worksGrid">
+      <!-- 1 海报 -->
+      <article class="work wide reveal" data-cat="poster" data-title="噪点宣言 NOISE MANIFESTO" data-year="2025" data-role="独立项目 / 海报 ×3"
+        data-desc="为校园设计周创作的三联海报。将打印机的抖动抖点（dithering）放大为画面主角：低分辨率图像的锯齿噪声被重新排版成标语本身，探讨「低保真不是缺陷，而是一种态度」。系列入选 2025 全国大学生平面设计展。">
+        <div class="work-media"><div class="art art-b1">
+          <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="噪点宣言系列海报：橙色底黑色抖动字体">
+            <defs><pattern id="dith" width="6" height="6" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.4" fill="#0d0d0f"/><circle cx="5" cy="5" r=".9" fill="#0d0d0f"/></pattern></defs>
+            <rect width="800" height="300" fill="#ff4d00"/>
+            <text x="40" y="150" font-family="Bricolage Grotesque Variable,sans-serif" font-weight="800" font-size="150" fill="url(#dith)" letter-spacing="-6">NOISE</text>
+            <text x="42" y="245" font-family="Noto Sans SC Variable,sans-serif" font-weight="700" font-size="72" fill="#0d0d0f" letter-spacing="10">噪点宣言</text>
+            <circle cx="700" cy="70" r="46" fill="none" stroke="#0d0d0f" stroke-width="3"/>
+            <text x="700" y="78" text-anchor="middle" font-family="JetBrains Mono Variable,monospace" font-size="15" fill="#0d0d0f">72dpi</text>
+          </svg></div></div>
+        <div class="work-info">
+          <div><h3>噪点宣言 NOISE MANIFESTO</h3><div class="work-tags"><span>海报</span><span>实验排版</span></div></div>
+          <span class="meta">2025 · 独立项目</span>
+        </div>
+      </article>
+
+      <!-- 2 品牌 -->
+      <article class="work reveal" data-cat="brand" data-title="山雾茶集 MIST & LEAF" data-year="2025" data-role="品牌全案 / 课程作业"
+        data-desc="新中式茶饮品牌全案：以「山脊线 × 蒸汽曲线」构成动态标志，在包装、杯贴、店面导视间保持同一套呼吸节奏。品牌色取自雨前龙井的茶汤色与青瓷釉，获 2025 学院奖品牌类银奖。">
+        <div class="work-media"><div class="art art-b3">
+          <svg viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice" role="img" aria-label="山雾茶集品牌：米色底青绿山脊曲线标志">
+            <rect width="600" height="450" fill="#e8e2d6"/>
+            <path d="M80 260 Q200 150 320 250 T560 230" fill="none" stroke="#2f5d50" stroke-width="10" stroke-linecap="round"/>
+            <path d="M120 300 Q240 210 360 290 T580 280" fill="none" stroke="#2f5d50" stroke-width="5" opacity=".55"/>
+            <circle cx="430" cy="140" r="52" fill="#2f5d50" opacity=".9"/>
+            <circle cx="430" cy="140" r="78" fill="none" stroke="#2f5d50" stroke-width="2" opacity=".4"/>
+            <text x="80" y="380" font-family="Noto Sans SC Variable,sans-serif" font-weight="700" font-size="46" fill="#1c3a32">山雾茶集</text>
+            <text x="82" y="410" font-family="JetBrains Mono Variable,monospace" font-size="14" fill="#2f5d50" letter-spacing="4">MIST &amp; LEAF TEA</text>
+          </svg></div></div>
+        <div class="work-info">
+          <div><h3>山雾茶集 MIST &amp; LEAF</h3><div class="work-tags"><span>品牌</span><span>包装</span></div></div>
+          <span class="meta">2025 · 学院奖银奖</span>
+        </div>
+      </article>
+
+      <!-- 3 字体 -->
+      <article class="work reveal" data-cat="type" data-title="折纸黑 PROTO FOLD" data-year="2024" data-role="实验字体 / 6 字重"
+        data-desc="一款以折痕为骨架的实验性黑体：每个笔画端点保留 8° 的「未折完」断口，让标题字带上手工折纸的紧张感。配套 GX 可变轴（折叠度 0–100），在动态海报中字体会随滚动逐渐「展开」。">
+        <div class="work-media"><div class="art art-b2">
+          <svg viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice" role="img" aria-label="折纸黑字体样张：深色底白色几何折痕字形">
+            <rect width="600" height="450" fill="#101014"/>
+            <g font-family="Bricolage Grotesque Variable,sans-serif" font-weight="800" fill="#f2efe9">
+              <text x="55" y="170" font-size="120" letter-spacing="-4">折 A</text>
+              <text x="55" y="300" font-size="120" letter-spacing="-4" fill="#ff4d00">折 B</text>
+            </g>
+            <path d="M55 340 L200 340 L200 355 L70 355 Z" fill="#f2efe9" opacity=".25"/>
+            <text x="57" y="392" font-family="JetBrains Mono Variable,monospace" font-size="13" fill="#8d8a84">FOLD AXIS 0 → 100 / 6 WEIGHTS / 2024</text>
+            <path d="M480 90 l30 -40 30 40 -30 40 z" fill="none" stroke="#ff4d00" stroke-width="2"/>
+            <path d="M480 90 l30 40 30 -40" fill="none" stroke="#f2efe9" stroke-width="1" opacity=".5"/>
+          </svg></div></div>
+        <div class="work-info">
+          <div><h3>折纸黑 PROTO FOLD</h3><div class="work-tags"><span>字体</span><span>可变字体</span></div></div>
+          <span class="meta">2024 · 实验字体</span>
+        </div>
+      </article>
+
+      <!-- 4 动态 -->
+      <article class="work reveal" data-cat="motion" data-title="节拍城市 CITY IN BPM" data-year="2024" data-role="动态视觉 / 音乐节主视觉"
+        data-desc="为城市音乐节设计的动态主视觉系统：路网、地铁线路与人流轨迹被节拍驱动，在 BPM 90–140 之间变形。输出包含 45 秒开场片、LED 舞台循环与社交媒体竖版模板，全网曝光 120 万+。">
+        <div class="work-media"><div class="art art-b4">
+          <svg viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice" role="img" aria-label="节拍城市动态视觉：深色底霓虹波形与路网">
+            <rect width="600" height="450" fill="#101014"/>
+            <g stroke="#1c1c20" stroke-width="1">
+              <path d="M0 120 H600 M0 210 H600 M0 300 H600 M0 390 H600"/>
+              <path d="M100 0 V450 M250 0 V450 M400 0 V450 M520 0 V450"/>
+            </g>
+            <polyline points="0,225 80,225 120,150 200,290 280,110 360,340 440,180 520,225 600,225" fill="none" stroke="#ff4d00" stroke-width="4" stroke-linejoin="round"/>
+            <polyline points="0,300 90,300 150,240 230,330 310,200 390,360 470,260 600,300" fill="none" stroke="#f2efe9" stroke-width="1.6" opacity=".5"/>
+            <circle cx="280" cy="110" r="9" fill="#ff4d00"/>
+            <circle cx="440" cy="180" r="5" fill="#f2efe9"/>
+            <text x="40" y="70" font-family="JetBrains Mono Variable,monospace" font-size="14" fill="#8d8a84" letter-spacing="3">CITY IN BPM · 90–140</text>
+            <text x="400" y="420" font-family="Bricolage Grotesque Variable,sans-serif" font-weight="800" font-size="44" fill="#f2efe9" letter-spacing="-2">节拍城市</text>
+          </svg></div></div>
+        <div class="work-info">
+          <div><h3>节拍城市 CITY IN BPM</h3><div class="work-tags"><span>动态</span><span>音乐节主视觉</span></div></div>
+          <span class="meta">2024 · 动态视觉</span>
+        </div>
+      </article>
+
+      <!-- 5 编辑 -->
+      <article class="work reveal" data-cat="poster" data-title="字里行间 BETWEEN GLYPHS" data-year="2023" data-role="编辑设计 / 独立杂志"
+        data-desc="一本关于「排版里的留白」的独立杂志设计：全刊只用字重、字号与空行建立层级，不使用任何图片与色块。内页采用不对称九宫格，让每一页的空白本身成为插图。印刷 300 册，两周内售罄。">
+        <div class="work-media"><div class="art art-b5">
+          <svg viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice" role="img" aria-label="字里行间杂志内页：白底黑字排版网格">
+            <rect width="600" height="450" fill="#f2efe9"/>
+            <g fill="#1a1916">
+              <rect x="60" y="60" width="150" height="14"/>
+              <rect x="60" y="100" width="220" height="6"/><rect x="60" y="116" width="180" height="6"/>
+              <rect x="60" y="132" width="210" height="6"/><rect x="60" y="148" width="120" height="6"/>
+              <rect x="330" y="60" width="90" height="90" fill="none" stroke="#1a1916" stroke-width="2"/>
+              <rect x="60" y="230" width="360" height="6"/><rect x="60" y="246" width="330" height="6"/>
+              <rect x="60" y="262" width="300" height="6"/><rect x="60" y="278" width="340" height="6"/>
+              <rect x="60" y="294" width="90" height="6" fill="#ff4d00"/>
+            </g>
+            <text x="330" y="122" font-family="Noto Sans SC Variable,sans-serif" font-weight="700" font-size="20" fill="#1a1916">留白</text>
+            <text x="60" y="380" font-family="JetBrains Mono Variable,monospace" font-size="13" fill="#8d8a84">ISSUE 01 · 300 COPIES · RISO</text>
+          </svg></div></div>
+        <div class="work-info">
+          <div><h3>字里行间 BETWEEN GLYPHS</h3><div class="work-tags"><span>编辑</span><span>独立出版</span></div></div>
+          <span class="meta">2023 · 独立杂志</span>
+        </div>
+      </article>
+
+      <!-- 6 品牌 -->
+      <article class="work wide reveal" data-cat="brand" data-title="夜航书店 NIGHT FERRY BOOKS" data-year="2026" data-role="毕业设计 / 品牌系统 + 导视"
+        data-desc="毕业设计：一间开到凌晨两点的独立书店。标志是一枚在书页波纹上航行的纸船，品牌语「白天运送货物，夜里运送失眠」。系统覆盖店招、书签、帆布袋与骑楼导视，并配套一套随营业时间改变亮度与字重的动态电子店招。">
+        <div class="work-media"><div class="art art-b6">
+          <svg viewBox="0 0 800 342" preserveAspectRatio="xMidYMid slice" role="img" aria-label="夜航书店品牌：深蓝夜色中纸船航行于书页波纹">
+            <defs><linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#101014"/><stop offset="1" stop-color="#1c2a3a"/></linearGradient></defs>
+            <rect width="800" height="342" fill="url(#night)"/>
+            <circle cx="620" cy="86" r="44" fill="#f2efe9" opacity=".92"/>
+            <circle cx="606" cy="78" r="40" fill="#101014" opacity=".0"/>
+            <path d="M0 240 Q100 220 200 240 T400 240 T600 240 T800 240" fill="none" stroke="#3a4a5c" stroke-width="2.5"/>
+            <path d="M0 268 Q100 250 200 268 T400 268 T600 268 T800 268" fill="none" stroke="#3a4a5c" stroke-width="1.6" opacity=".6"/>
+            <path d="M370 196 L430 196 L400 160 Z" fill="#f2efe9"/>
+            <path d="M362 196 L438 196 Q400 226 362 196 Z" fill="#ff4d00"/>
+            <text x="60" y="90" font-family="Noto Sans SC Variable,sans-serif" font-weight="700" font-size="52" fill="#f2efe9" letter-spacing="6">夜航书店</text>
+            <text x="62" y="122" font-family="JetBrains Mono Variable,monospace" font-size="14" fill="#8d8a84" letter-spacing="3">NIGHT FERRY BOOKS · OPEN TILL 02:00</text>
+          </svg></div></div>
+        <div class="work-info">
+          <div><h3>夜航书店 NIGHT FERRY BOOKS</h3><div class="work-tags"><span>品牌</span><span>毕业设计</span><span>导视</span></div></div>
+          <span class="meta">2026 · 毕业设计</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div><p class="eyebrow">02 · About</p><h2>关于我</h2></div>
+      <span class="sec-no">HANGZHOU · CAA</span>
+    </div>
+    <div class="about-grid">
+      <div class="portrait reveal" role="img" aria-label="作者剪影插画：橙色背景上的轮廓">
+        <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+          <rect width="300" height="400" fill="#ff4d00"/>
+          <circle cx="150" cy="140" r="62" fill="#0d0d0f"/>
+          <path d="M40 400 Q40 250 150 245 Q260 250 260 400 Z" fill="#0d0d0f"/>
+          <circle cx="150" cy="140" r="62" fill="none" stroke="#f2efe9" stroke-width="2" opacity=".5"/>
+          <path d="M20 60 L60 20 M280 60 L240 20" stroke="#f2efe9" stroke-width="2" opacity=".4"/>
+          <text x="150" y="380" text-anchor="middle" font-family="JetBrains Mono Variable,monospace" font-size="12" fill="#f2efe9" opacity=".7">CHEN YU / b.2003</text>
+        </svg>
+      </div>
+      <div class="about reveal">
+        <h2>设计不是加法，<br>是让对的东西无法被忽略。</h2>
+        <p>我是陈屿，中国美术学院视觉传达设计系 2026 届学生。四年来我一直在同一组问题上打转：文字怎样才能不只是被「读」，而是被「感到」？于是我做了实验字体、做抖动海报、做被节拍驱动的城市图形——所有作品共享同一个底层冲动：给信息一个身体。</p>
+        <p>工作方式偏研究员型：先做大量视觉调研与田野笔记，再用快速的草图对冲掉自我感动，最后花 80% 的时间在网格、字距与动效节奏这些没人看见的地方。</p>
+        <div class="skills">
+          <div class="skill" style="--w:92%"><b>版式与网格系统</b><em>92%</em><span class="bar"><i></i></span></div>
+          <div class="skill" style="--w:88%"><b>字体设计 / Figma / Illustrator</b><em>88%</em><span class="bar"><i></i></span></div>
+          <div class="skill" style="--w:80%"><b>动态视觉 / After Effects</b><em>80%</em><span class="bar"><i></i></span></div>
+          <div class="skill" style="--w:72%"><b>CSS / 创意编程</b><em>72%</em><span class="bar"><i></i></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="awards reveal" style="margin-top:96px">
+      <div class="award"><span class="meta">2025</span><h3>全国大学生平面设计展 · 入选</h3><span class="pull">海报类 ×3</span></div>
+      <div class="award"><span class="meta">2025</span><h3>中国大学生广告艺术节学院奖 · 品牌类银奖</h3><span class="pull">山雾茶集</span></div>
+      <div class="award"><span class="meta">2024</span><h3>HIIIBRAND 国际品牌标志设计大赛 · 佳作奖</h3><span class="pull">节拍城市</span></div>
+      <div class="award"><span class="meta">2023</span><h3>白金创意国际大学生平面设计大赛 · 优秀作品</h3><span class="pull">字里行间</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <p class="eyebrow" style="font-family:var(--font-mono);font-size:var(--fs-meta);letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 24px">03 · Contact</p>
+    <h2><a href="mailto:hello@chenyu.design">来聊点<br>看得见的。</a></h2>
+    <p class="lead">正在寻找 2026 年品牌 / 字体 / 动态方向的实习与自由合作机会。邮箱白天 24 小时内回复，深夜回得更快。</p>
+    <a class="btn" href="mailto:hello@chenyu.design">hello@chenyu.design →</a>
+    <div class="socials">
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="Behance">Behance</a>
+      <a href="#" aria-label="站酷 ZCOOL">站酷 ZCOOL</a>
+      <a href="#" aria-label="小红书">小红书</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pagefoot">
+  <span>© 2026 陈屿 CHEN YU — 视觉传达设计</span>
+  <span> Designed &amp; coded by hand · Hangzhou, CN</span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="作品详情">
+  <button class="lb-close" id="lbClose">关闭 ✕</button>
+  <div class="lb-panel">
+    <div class="lb-media" id="lbMedia"></div>
+    <div class="lb-body">
+      <div><h3 id="lbTitle"></h3><p id="lbDesc"></p></div>
+      <dl class="lb-facts">
+        <div><dt>年份</dt><dd id="lbYear"></dd></div>
+        <div><dt>角色</dt><dd id="lbRole"></dd></div>
+        <div><dt>分类</dt><dd id="lbCat"></dd></div>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<script>
+/* loader */
+(function(){
+  var n=0,el=document.querySelector('#loader .count');
+  var t=setInterval(function(){
+    n+=Math.floor(Math.random()*12)+4;
+    if(n>=100){n=100;clearInterval(t);setTimeout(function(){document.getElementById('loader').classList.add('done');},250);}
+    el.textContent=n;
+  },70);
+})();
+
+/* custom cursor */
+(function(){
+  var c=document.getElementById('cursor');
+  document.addEventListener('mousemove',function(e){c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+  document.querySelectorAll('a,button,.work').forEach(function(el){
+    el.addEventListener('mouseenter',function(){c.classList.add('hovering');});
+    el.addEventListener('mouseleave',function(){c.classList.remove('hovering');});
+  });
+})();
+
+/* scroll progress */
+(function(){
+  var p=document.getElementById('progress');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement;
+    p.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  },{passive:true});
+})();
+
+/* marquee content */
+(function(){
+  var words=['海报 POSTER','字体 TYPE','品牌 BRAND','动态 MOTION','排版 GRID','留白 SPACE'];
+  var track=document.getElementById('marqueeTrack');
+  var html=words.map(function(w){return '<span>'+w+' ✳</span>';}).join('');
+  track.innerHTML=html+html+html+html;
+})();
+
+/* reveal on scroll */
+(function(){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  var io2=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target);}});
+  },{threshold:.3});
+  document.querySelectorAll('.skill').forEach(function(el){io2.observe(el);});
+})();
+
+/* works filter */
+(function(){
+  var btns=document.querySelectorAll('.filters button');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      btns.forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      var f=b.dataset.filter;
+      document.querySelectorAll('.work').forEach(function(w){
+        var show=f==='all'||w.dataset.cat===f;
+        w.classList.toggle('hidden',!show);
+        if(show){w.classList.remove('in');requestAnimationFrame(function(){w.classList.add('in');});}
+      });
+    });
+  });
+})();
+
+/* lightbox */
+(function(){
+  var lb=document.getElementById('lightbox');
+  var catNames={poster:'海报',brand:'品牌',type:'字体',motion:'动态'};
+  function open(w){
+    var art=w.querySelector('.art').cloneNode(true);
+    var media=document.getElementById('lbMedia');media.innerHTML='';media.appendChild(art);
+    document.getElementById('lbTitle').textContent=w.dataset.title;
+    document.getElementById('lbDesc').textContent=w.dataset.desc;
+    document.getElementById('lbYear').textContent=w.dataset.year;
+    document.getElementById('lbRole').textContent=w.dataset.role;
+    document.getElementById('lbCat').textContent=catNames[w.dataset.cat]||w.dataset.cat;
+    lb.classList.add('open');lb.scrollTop=0;document.body.style.overflow='hidden';
+  }
+  function close(){lb.classList.remove('open');document.body.style.overflow='';}
+  document.querySelectorAll('.work').forEach(function(w){
+    w.addEventListener('click',function(){open(w);});
+    w.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(w);}});
+    w.setAttribute('tabindex','0');
+  });
+  document.getElementById('lbClose').addEventListener('click',close);
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+
+/* hero type particle canvas */
+(function(){
+  var cv=document.getElementById('typeCanvas'),ctx=cv.getContext('2d');
+  var W,H,pts=[],mouse={x:-999,y:-999};
+  function build(){
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    var off=document.createElement('canvas');off.width=W;off.height=H;
+    var o=off.getContext('2d');
+    var size=Math.min(W*0.22,260);
+    o.font='800 '+size+'px "Bricolage Grotesque Variable",sans-serif';
+    o.textAlign='center';o.textBaseline='middle';
+    o.fillStyle='#fff';
+    o.fillText('CHEN YU',W/2,H/2);
+    o.font='700 '+Math.min(W*0.05,44)+'px "Noto Sans SC Variable",sans-serif';
+    o.fillText('陈 屿 · 视 觉 传 达',W/2,H/2+size*0.75);
+    var data=o.getImageData(0,0,W,H).data;
+    pts=[];
+    var gap=Math.max(6,Math.floor(W/170));
+    for(var y=0;y<H;y+=gap){
+      for(var x=0;x<W;x+=gap){
+        if(data[(y*W+x)*4+3]>128){
+          pts.push({ox:x,oy:y,x:x,y:y,vx:0,vy:0});
+        }
+      }
+    }
+  }
+  build();
+  window.addEventListener('resize',build);
+  cv.parentElement.addEventListener('mousemove',function(e){
+    var r=cv.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;
+  });
+  cv.parentElement.addEventListener('mouseleave',function(){mouse.x=-999;mouse.y=-999;});
+  var accent='255,77,0',fg='242,239,233';
+  (function loop(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];
+      var dx=p.x-mouse.x,dy=p.y-mouse.y,d2=dx*dx+dy*dy;
+      if(d2<6400){
+        var f=(6400-d2)/6400*3.2;
+        var d=Math.sqrt(d2)||1;
+        p.vx+=dx/d*f;p.vy+=dy/d*f;
+      }
+      p.vx+=(p.ox-p.x)*0.09;p.vy+=(p.oy-p.y)*0.09;
+      p.vx*=0.86;p.vy*=0.86;
+      p.x+=p.vx;p.y+=p.vy;
+      var act=Math.min(1,(Math.abs(p.vx)+Math.abs(p.vy))/2);
+      ctx.fillStyle='rgba('+(act>0.25?accent:fg)+','+(0.25+act*0.75)+')';
+      ctx.fillRect(p.x,p.y,2.2,2.2);
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>
